@@ -15,13 +15,13 @@ defmodule ConnectFour do
   end
  end
 
- defp check_stacked(board, column_index) do
+ def check_stacked(board, column_index) do
   board
   |> Enum.at(column_index)
   |> is_four_in_succession?()
  end
 
- defp check_row_left(board, column_index) do
+ def check_row_left(board, column_index) do
   row_from_columns = generate_row_from_columns(board, column_index, -1, [])
   is_four_in_succession?(row_from_columns)
   case is_four_in_succession?(row_from_columns) do
@@ -30,7 +30,7 @@ defmodule ConnectFour do
   end
  end
 
- defp check_row_right(board, column_index) do
+ def check_row_right(board, column_index) do
    row_from_columns = generate_row_from_columns(board, column_index, + 1, [])
    is_four_in_succession?(row_from_columns)
  end
