@@ -58,7 +58,22 @@ defmodule ConnectFour do
   is_four_in_succession?(row)
  end
 
+ def check_diagonal_to_top_left(board, column_index) do 
+  current_column = Enum.at(board, column_index)
+  current_piece_index = div(Enum.count(current_column), -1)
+  row = generate_row_from_columns_diagonally(board, column_index, -1, -1, current_piece_index, [])
+  is_four_in_succession?(row)
+ end
+
+ def check_diagonal_to_bottom_right(board, column_index) do 
+  current_column = Enum.at(board, column_index)
+  current_piece_index = div(Enum.count(current_column), -1)
+  row = generate_row_from_columns_diagonally(board, column_index, +1, +1, current_piece_index, [])
+  is_four_in_succession?(row)
+ end
+ 
  defp generate_row_from_columns_diagonally(_, _, _, _, _, acc) when length(acc) == 4, do: acc
+ defp generate_row_from_columns_diagonally(_, _, _, _, _, [_, item | _] = acc) when is_nil(item), do: acc
  defp generate_row_from_columns_diagonally(board, column_index, column_shift, piece_shift, current_piece_index, acc) do
   current_column = Enum.at(board, column_index)
   piece = Enum.at(current_column, current_piece_index)

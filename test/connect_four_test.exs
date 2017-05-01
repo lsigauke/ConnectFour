@@ -136,4 +136,51 @@ defmodule ConnectFourTest do
     updated_board =  ConnectFour.move(updated_board, :x, 0)
     assert {:winner, :x} == ConnectFour.check_diagonal_to_top_right(updated_board, 0)
   end
+
+  test "connect 4 diagonally to top left wins", %{empty_board: board} do
+    updated_board =  ConnectFour.move(board, :x, 3)
+    updated_board =  ConnectFour.move(updated_board, :x, 3)
+    updated_board =  ConnectFour.move(updated_board, :y, 3)
+    updated_board =  ConnectFour.move(updated_board, :x, 3)
+    
+    assert {:winner, nil} == ConnectFour.check_diagonal_to_top_left(updated_board, 3)
+    
+    updated_board =  ConnectFour.move(updated_board, :y, 4)
+    updated_board =  ConnectFour.move(updated_board, :y, 4)
+    updated_board =  ConnectFour.move(updated_board, :x, 4)
+
+    assert {:winner, nil} == ConnectFour.check_diagonal_to_top_left(updated_board, 4)
+
+    updated_board =  ConnectFour.move(updated_board, :y, 5)
+    updated_board =  ConnectFour.move(updated_board, :x, 5)
+
+    assert {:winner, nil} == ConnectFour.check_diagonal_to_top_left(updated_board, 5)
+
+    updated_board =  ConnectFour.move(updated_board, :x, 6)
+    assert {:winner, :x} == ConnectFour.check_diagonal_to_top_left(updated_board, 6)
+  end
+
+  test "connect 4 diagonally to bottom right wins", %{empty_board: board} do
+    updated_board =  ConnectFour.move(board, :x, 6)
+    
+    assert {:winner, nil} == ConnectFour.check_diagonal_to_bottom_right(updated_board, 6)
+
+    updated_board =  ConnectFour.move(updated_board, :y, 5)
+    updated_board =  ConnectFour.move(updated_board, :x, 5)
+
+    assert {:winner, nil} == ConnectFour.check_diagonal_to_bottom_right(updated_board, 5)
+
+    updated_board =  ConnectFour.move(updated_board, :y, 4)
+    updated_board =  ConnectFour.move(updated_board, :y, 4)
+    updated_board =  ConnectFour.move(updated_board, :x, 4)
+
+    assert {:winner, nil} == ConnectFour.check_diagonal_to_bottom_right(updated_board, 4)
+
+    updated_board =  ConnectFour.move(updated_board, :x, 3)
+    updated_board =  ConnectFour.move(updated_board, :x, 3)
+    updated_board =  ConnectFour.move(updated_board, :y, 3)
+    updated_board =  ConnectFour.move(updated_board, :x, 3)
+    
+    assert {:winner, :x} == ConnectFour.check_diagonal_to_bottom_right(updated_board, 3)
+  end
 end
